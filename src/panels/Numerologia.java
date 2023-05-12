@@ -3,6 +3,7 @@ package panels;
 import java.util.ArrayList;
 
 public class Numerologia {
+
     String imie;
     String nazwisko;
     String data;
@@ -36,6 +37,15 @@ public class Numerologia {
         warunkiZewnetrzne(this.data);
         rokNumerologiczny(this.drogaZycia);
         wezlyNS(this.rahu, this.ketu);
+
+        this.drogaZycia = getSingleNumber(drogaZycia);
+        this.liczbaDuszy = getSingleNumber(liczbaDuszy);
+        this.liczbaZewnetrzna = getSingleNumber(liczbaZewnetrzna);
+
+        this.pierwszeWarunkiZewnetrzne = getSingleNumber(pierwszeWarunkiZewnetrzne);
+        this.drugieWarunkiZewnetrzne = getSingleNumber(drugieWarunkiZewnetrzne);
+        this.trzecieWarunkiZewnetrzne = getSingleNumber(trzecieWarunkiZewnetrzne);
+        this.czwarteWarunkiZewnetrzne = getSingleNumber(czwarteWarunkiZewnetrzne);
 
         display();
     }
@@ -129,6 +139,35 @@ public class Numerologia {
     }
 
     public void wezlyNS(String rahu, String ketu){
+
+    }
+
+    public int getSingleNumber(int zmienna){
+        int zwrot = 0;
+        String dane = String.valueOf(zmienna);
+        if(dane.length()>1){
+            ArrayList<Integer> tablica = new ArrayList<>();
+            for(int i = 0; i<dane.length(); i++){
+                tablica.add(Integer.parseInt(String.valueOf(dane.charAt(i))));
+            }
+            for(int i : tablica){
+                zwrot+=i;
+            }
+
+            String zwrotS = String.valueOf(zwrot);
+            if(zwrotS.length()>1){
+                int l1 = zwrot/10;
+                int l2 = zwrot%10;
+                zwrot = l1 + l2;
+            }
+        }
+        else {
+            zwrot = zmienna;
+        }
+        
+        return zwrot;
+
+
 
     }
 
