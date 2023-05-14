@@ -15,7 +15,7 @@ public class NumerologyPanel extends JPanel {
     JTextField rahu;
     JTextField ketu;
 
-    JPanel btn = new JPanel();
+
 
     MyNumerologyListener myNumerologyListener;
 

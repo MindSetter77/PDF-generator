@@ -1,5 +1,7 @@
 package panels;
 
+import pdfcreator.PDFCreator;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -37,6 +39,13 @@ public class MyNumerologyListener implements MouseListener {
             );
 
             numerologia.start();
+
+            PDFCreator pdfCreator = new PDFCreator(numerologia.imie, numerologia.nazwisko, numerologia.data,
+                    numerologia.drogaZycia, numerologia.liczbaDuszy, numerologia.liczbaZewnetrzna,
+                    numerologia.pierwszeWarunkiZewnetrzne, numerologia.drugieWarunkiZewnetrzne,
+                    numerologia.trzecieWarunkiZewnetrzne, numerologia.czwarteWarunkiZewnetrzne,
+                    numerologia.rokNumerologiczny, numerologia.znakZodiaku, numerologia.rahu, numerologia.ketu);
+            pdfCreator.create();
 
 
 
