@@ -47,6 +47,8 @@ public class Numerologia {
         this.trzecieWarunkiZewnetrzne = getSingleNumber(trzecieWarunkiZewnetrzne);
         this.czwarteWarunkiZewnetrzne = getSingleNumber(czwarteWarunkiZewnetrzne);
 
+        this.rokNumerologiczny = getSingleNumber(this.rokNumerologiczny);
+
         display();
     }
 
@@ -132,6 +134,8 @@ public class Numerologia {
         this.drugieWarunkiZewnetrzne = dzienI + rokI;
         this.trzecieWarunkiZewnetrzne = this.pierwszeWarunkiZewnetrzne+ this.drugieWarunkiZewnetrzne;
         this.czwarteWarunkiZewnetrzne = miesiacI + rokI;
+
+
     }
 
     public void rokNumerologiczny(int drogaZycia){
@@ -164,7 +168,7 @@ public class Numerologia {
         else {
             zwrot = zmienna;
         }
-        
+
         return zwrot;
 
 
