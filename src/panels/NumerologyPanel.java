@@ -3,9 +3,7 @@ package panels;
 import main.Window;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class NumerologyPanel extends JPanel {
     JTextField imie;

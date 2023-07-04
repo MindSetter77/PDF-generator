@@ -3,6 +3,7 @@ package pdfcreator;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.*;
+import panels.Cykl;
 
 
 import java.io.FileOutputStream;
@@ -10,13 +11,13 @@ import java.io.IOException;
 import java.nio.charset.MalformedInputException;
 
 public class PDFCreator {
-    public Font ChopinScript40;
-    public Font ChopinScript30;
-    public Font ChopinScript20;
+    static public Font ChopinScript40;
+    static public Font ChopinScript30;
+    static public Font ChopinScript20;
 
-    public Font AlegreyaSans20Bold;
-    public Font AlegreyaSans18;
-    public Font AlegreyaSans18Bold;
+    static public Font AlegreyaSans20Bold;
+    static public Font AlegreyaSans18;
+    static public Font AlegreyaSans18Bold;
 
     BazaDanych bazaDanych;
 
@@ -77,7 +78,9 @@ public class PDFCreator {
         try{
             int lineSpacingText = 20;
 
-            String path = "C:\\Users\\oleks\\Desktop\\test\\numerologia.pdf";
+            String zmienna = this.imie+"_"+this.nazwisko;
+
+            String path = "C:\\Users\\oleks\\Desktop\\test\\"+zmienna+".pdf";
             Document document = new Document(PageSize.A4);
             PdfWriter.getInstance(document, new FileOutputStream(path));
             Paragraph space = new Paragraph(" ");
@@ -95,8 +98,12 @@ public class PDFCreator {
                     ChopinScript30));
             imieINazwisko.setAlignment(Element.ALIGN_CENTER);
 
+            String day  = this.dataUrodzenia.substring(0, 2);
+            String month  = this.dataUrodzenia.substring(2, 4);
+            String year  = this.dataUrodzenia.substring(4, 8);
+
             //Data urodzenia
-            Paragraph data = new Paragraph(new Phrase(10f,this.dataUrodzenia,
+            Paragraph data = new Paragraph(new Phrase(10f,day+"."+month+"."+year,
                     ChopinScript20));
             data.setAlignment(Element.ALIGN_CENTER);
 
@@ -125,7 +132,7 @@ public class PDFCreator {
             liczbaDuszyCel.setAlignment(Element.ALIGN_CENTER);
 
             //Droga zycia text
-            Paragraph liczbaDuszyText = new Paragraph(new Phrase(lineSpacingText,bazaDanych.liczbaDuszy(5),
+            Paragraph liczbaDuszyText = new Paragraph(new Phrase(lineSpacingText,bazaDanych.liczbaDuszy(this.liczbaDuszy),
                     AlegreyaSans18));
 
             //Liczba realizacji zewnętrznej/ intymnej
@@ -139,55 +146,79 @@ public class PDFCreator {
             liczbaZewnetrznaCel.setAlignment(Element.ALIGN_CENTER);
 
             //Liczba zewnetrzna text
-            Paragraph liczbaZewnetrznaText = new Paragraph(new Phrase(lineSpacingText,bazaDanych.liczbaZewnetrzna(5),
+            Paragraph liczbaZewnetrznaText = new Paragraph(new Phrase(lineSpacingText,bazaDanych.liczbaZewnetrzna(this.liczbaZewnetrzna),
                     AlegreyaSans18));
 
             //Jako osoba urodzona
-            Paragraph jakoOsobaUrodzona = new Paragraph(new Phrase(10f,"Jako osoba urodzona w maju- Cykl w wibracji 5",
+            Paragraph jakoOsobaUrodzona = new Paragraph(new Phrase(10f,bazaDanych.jakoOsobaUrodzona(dataUrodzenia),
                     ChopinScript30));
             jakoOsobaUrodzona.setAlignment(Element.ALIGN_CENTER);
 
-            //Lekcja cyklu w wibracji
-            Paragraph lekcjaCykluWWibracji = new Paragraph(new Phrase(10f,"LEKCJA CYKLU W WIBRACJI 5",
-                    AlegreyaSans20Bold));
-            lekcjaCykluWWibracji.setAlignment(Element.ALIGN_CENTER);
+            int miesiac = Integer.parseInt(dataUrodzenia.substring(2,4));
+            if(miesiac == 10) miesiac = 1;
+            if(miesiac == 11) miesiac = 2;
+            if(miesiac == 12) miesiac = 3;
 
-            //Cykl w wibracji
-            Paragraph cyklWWibracjiText = new Paragraph(new Phrase(lineSpacingText,bazaDanych.cyklWWibracji(5),
-                    AlegreyaSans18));
+            document.add(space);
+
+            Paragraph cyklWWibracji = new Paragraph(new Phrase(10f,"Cykl w wibracji "+miesiac,
+                    PDFCreator.AlegreyaSans20Bold));
+            cyklWWibracji.setAlignment(Element.ALIGN_CENTER);
+
+
+            Paragraph cyklWWibracjiText = new Paragraph(new Phrase(lineSpacingText,bazaDanych.cyklWWibracjiText(miesiac),
+                    PDFCreator.AlegreyaSans18));
+            cyklWWibracjiText.setAlignment(Element.ALIGN_CENTER);
+
+            Paragraph lekcjaCyklu = new Paragraph(new Phrase(10f,"Lekcja cyklu w wibracji "+miesiac,
+                    PDFCreator.AlegreyaSans20Bold));
+            lekcjaCyklu.setAlignment(Element.ALIGN_CENTER);
+
+            Paragraph lekcjaCykluText = new Paragraph(new Phrase(lineSpacingText,bazaDanych.lekcjaCykluText(miesiac),
+                    PDFCreator.AlegreyaSans18));
+
+            Paragraph celeCyklu = new Paragraph(new Phrase(10f,"Cele cyklu w wibracji "+miesiac,
+                    PDFCreator.AlegreyaSans20Bold));
+            celeCyklu.setAlignment(Element.ALIGN_CENTER);
+
+            Paragraph celeCykluText = new Paragraph(new Phrase(lineSpacingText,bazaDanych.celeCyklu(miesiac, dataUrodzenia),
+                    PDFCreator.AlegreyaSans18));
+
+
+
+
+
+
+
 
             //Warunki zewnetrzne
             Paragraph warunkiZewnetrzneNaglowek = new Paragraph(new Phrase(10f,"WARUNKI ZEWNETRZNE :",
                     AlegreyaSans20Bold));
-            liczbaDuszyNaglowek.setAlignment(Element.ALIGN_CENTER);
+            warunkiZewnetrzneNaglowek.setAlignment(Element.ALIGN_CENTER);
 
             //warunki
-            Paragraph pierwszeWarunki = new Paragraph(new Phrase(10f,"Pierwsze warunki zewnętrzne: "+this.pwz,
-                    AlegreyaSans20Bold));
 
 
-            Paragraph pierwszeWarunkiText = new Paragraph(new Phrase(lineSpacingText,"Do 25 roku życia byłaś w wibracji liczby: "+this.pwz,
+
+            Paragraph pierwszeWarunkiText = new Paragraph(new Phrase(lineSpacingText,"Do 25 roku życia wibracja liczby: "+this.pwz + "\n- pierwsze warunki zewnętrzne",
                     AlegreyaSans18));
 
-            Paragraph drugieWarunki = new Paragraph(new Phrase(10f,"Drugie warunki zewnętrzne: "+this.dwz,
-                    AlegreyaSans20Bold));
 
 
-            Paragraph drugieWarunkiText = new Paragraph(new Phrase(lineSpacingText,"Od 25 do 34 roku życia byłaś w wibracji liczby: "+this.dwz,
+
+            Paragraph drugieWarunkiText = new Paragraph(new Phrase(lineSpacingText,"Od 25 do 34 roku życia wibracja liczby: "+this.dwz+"\n- drugie warunki zewnętrzne",
                     AlegreyaSans18));
 
-            Paragraph trzecieWarunki = new Paragraph(new Phrase(10f,"Trzecie warunki zewnętrzne: "+this.twz,
-                    AlegreyaSans20Bold));
 
 
-            Paragraph trzecieWarunkiText = new Paragraph(new Phrase(lineSpacingText,"Od 34 do 43 roku życia jesteś w wibracji liczby: "+this.twz,
+
+            Paragraph trzecieWarunkiText = new Paragraph(new Phrase(lineSpacingText,"Od 34 do 43 roku życia wibracja liczby: "+this.twz+"\n- trzecie warunki zewnętrzne",
                     AlegreyaSans18));
 
-            Paragraph czwarteWarunki = new Paragraph(new Phrase(10f,"Czwarte warunki zewnętrzne: "+this.cwz,
-                    AlegreyaSans20Bold));
 
 
-            Paragraph czwarteWarunkiText = new Paragraph(new Phrase(lineSpacingText,"Od 43 roku życia będziesz w wibracji liczby: "+this.cwz,
+
+            Paragraph czwarteWarunkiText = new Paragraph(new Phrase(lineSpacingText,"Od 43 roku życia będziesz w wibracja liczby: "+this.cwz+"\n- czwarte warunki zewnętrzne",
                     AlegreyaSans18));
 
             Paragraph naglowekPierwszy = new Paragraph(new Phrase(10f,"Warunki zewnętrzne w wibracji "+this.pwz+": ",
@@ -233,12 +264,18 @@ public class PDFCreator {
                     AlegreyaSans18));
 
             //Znak zodiaku naglowek
-            Paragraph znakZodiakuNaglowek = new Paragraph(new Phrase(10f,"Znak zodiaku: "+this.znakZodiaku,
+            String first = this.znakZodiaku.substring(0,1);
+            first = first.toUpperCase();
+            System.out.println(first);
+            String last = this.znakZodiaku.substring(1);
+
+
+            Paragraph znakZodiakuNaglowek = new Paragraph(new Phrase(10f,"Znak zodiaku: "+first+last,
                     AlegreyaSans20Bold));
             znakZodiakuNaglowek.setAlignment(Element.ALIGN_CENTER);
 
             //Znak zodiaku text
-            Paragraph znakZodiakuText = new Paragraph(new Phrase(lineSpacingText,bazaDanych.znakZodiaku(this.znakZodiaku),
+            Paragraph znakZodiakuText = new Paragraph(new Phrase(lineSpacingText,bazaDanych.znakZodiaku(this.rahu),
                     AlegreyaSans18));
 
 
@@ -289,35 +326,56 @@ public class PDFCreator {
             document.add(jakoOsobaUrodzona);
             document.add(space);
             document.add(space);
-            document.add(lekcjaCykluWWibracji);
+
+            //document.add("asdad");
+            document.add(space);
+            document.add(cyklWWibracji);
             document.add(space);
             document.add(cyklWWibracjiText);
             document.add(space);
             document.add(space);
+            document.add(lekcjaCyklu);
+            document.add(space);
+            document.add(lekcjaCykluText);
+            document.add(space);
+            document.add(space);
+            document.add(celeCyklu);
+            document.add(space);
+            document.add(celeCykluText);
 
-            document.add(pierwszeWarunki);
+
+
+            document.add(space);
+
+            document.add(space);
+            document.add(space);
+            document.add(warunkiZewnetrzneNaglowek);
+            document.add(space);
+            document.add(space);
+
+            //document.add(pierwszeWarunki);
             document.add(space);
             document.add(pierwszeWarunkiText);
             document.add(space);
             document.add(space);
 
-            document.add(drugieWarunki);
             document.add(space);
             document.add(drugieWarunkiText);
             document.add(space);
             document.add(space);
 
-            document.add(trzecieWarunki);
             document.add(space);
             document.add(trzecieWarunkiText);
             document.add(space);
             document.add(space);
 
-            document.add(czwarteWarunki);
+
             document.add(space);
             document.add(czwarteWarunkiText);
             document.add(space);
             document.add(space);
+
+
 
             document.add(naglowekPierwszy);
             document.add(space);
@@ -325,24 +383,36 @@ public class PDFCreator {
             document.add(space);
             document.add(space);
 
-            document.add(naglowekDrugi);
-            document.add(space);
-            document.add(naglowekDrugiText);
-            document.add(space);
-            document.add(space);
+            if(pwz!=dwz){
+                document.add(naglowekDrugi);
+                document.add(space);
+                document.add(naglowekDrugiText);
+                document.add(space);
+                document.add(space);
+            }
 
-            document.add(naglowekTrzeci);
-            document.add(space);
-            document.add(naglowekTrzeciText);
-            document.add(space);
-            document.add(space);
 
-            document.add(naglowekCzwarty);
-            document.add(space);
-            document.add(naglowekCzwartyText);
-            document.add(space);
-            document.add(space);
-            document.add(space);
+
+            if(twz!= pwz && twz != dwz){
+                document.add(naglowekTrzeci);
+                document.add(space);
+                document.add(naglowekTrzeciText);
+                document.add(space);
+                document.add(space);
+            }
+
+
+
+            if(cwz!=twz && cwz!=dwz && cwz!=pwz){
+                document.add(naglowekCzwarty);
+                document.add(space);
+                document.add(naglowekCzwartyText);
+                document.add(space);
+                document.add(space);
+                document.add(space);
+            }
+
+
 
             document.add(twojRokNumerologiczny);
             document.add(space);

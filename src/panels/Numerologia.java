@@ -49,7 +49,7 @@ public class Numerologia {
 
         this.rokNumerologiczny = getSingleNumber(this.rokNumerologiczny);
 
-        display();
+        //display();
     }
 
     public void wyliczDrogeZycia(String data){
