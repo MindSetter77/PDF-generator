@@ -8,13 +8,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Window extends JFrame {
-    public static Color red5 = new Color(238, 69, 96);
-    public static Color red4 = new Color(199, 44, 65);
-    public static Color red3 = new Color(128, 19, 54);
-    public static Color red2 = new Color(81, 10, 49);
-    public static Color red1 = new Color(45, 20, 44);
-    public static int WIDTH = 1200;
-    public static int HEIGHT = 800;
+    public static Color red5 = new Color(218, 255, 251);
+    public static Color red4 = new Color(153, 234, 217);
+    public static Color red3 = new Color(100, 204, 197);
+    public static Color red2 = new Color(23, 107, 135);
+    public static Color red1 = new Color(0, 28, 48);
+    public static int WIDTH = 600;
+    public static int HEIGHT = 400;
     LeftPanel leftPanel;
     SettingsPanel settingsPanel;
     NumerologyPanel numerologyPanel;
@@ -24,12 +24,16 @@ public class Window extends JFrame {
         this.settingsPanel = new SettingsPanel();
         settingsPanel.setVisible(false);
 
-        this.numerologyPanel = new NumerologyPanel();
+        this.numerologyPanel = new NumerologyPanel(settingsPanel);
         numerologyPanel.setVisible(false);
 
         this.add(leftPanel);
         this.add(settingsPanel);
         this.add(numerologyPanel);
+
+        MyRunnable r = new MyRunnable(this);
+        Thread thread = new Thread(r);
+        thread.start();
 
         this.setSize(WIDTH, HEIGHT);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

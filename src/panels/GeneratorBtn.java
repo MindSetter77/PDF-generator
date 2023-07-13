@@ -21,7 +21,7 @@ public class GeneratorBtn extends JPanel {
 
 
         this.setLayout(null);
-        this.setBounds(486, 650, 200, 35);
+        this.setBounds(150, 275, 200, 35);
         this.setBackground(Window.red5);
     }
 }

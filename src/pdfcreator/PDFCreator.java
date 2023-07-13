@@ -1,11 +1,15 @@
 package pdfcreator;
 
 import com.itextpdf.text.*;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.*;
 import panels.Cykl;
+import panels.SettingsPanel;
 
 
+import java.awt.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.MalformedInputException;
@@ -74,13 +78,13 @@ public class PDFCreator {
         this.ketu = ketu;
 
     }
-    public void create(){
+    public void create(String path){
         try{
             int lineSpacingText = 20;
 
             String zmienna = this.imie+"_"+this.nazwisko;
 
-            String path = "C:\\Users\\oleks\\Desktop\\test\\"+zmienna+".pdf";
+            System.out.println(path);
             Document document = new Document(PageSize.A4);
             PdfWriter.getInstance(document, new FileOutputStream(path));
             Paragraph space = new Paragraph(" ");

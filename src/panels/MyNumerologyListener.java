@@ -7,9 +7,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class MyNumerologyListener implements MouseListener {
-
+    SettingsPanel settingsPanel;
     NumerologyPanel numerologyPanel;
-    public MyNumerologyListener(NumerologyPanel numerologyPanel){
+    public MyNumerologyListener(NumerologyPanel numerologyPanel, SettingsPanel settingsPanel){
+        this.settingsPanel =settingsPanel;
         this.numerologyPanel = numerologyPanel;
     }
 
@@ -40,12 +41,14 @@ public class MyNumerologyListener implements MouseListener {
 
             numerologia.start();
 
+            String sciezka = settingsPanel.returnPath();
+
             PDFCreator pdfCreator = new PDFCreator(numerologia.imie, numerologia.nazwisko, numerologia.data,
                     numerologia.drogaZycia, numerologia.liczbaDuszy, numerologia.liczbaZewnetrzna,
                     numerologia.pierwszeWarunkiZewnetrzne, numerologia.drugieWarunkiZewnetrzne,
                     numerologia.trzecieWarunkiZewnetrzne, numerologia.czwarteWarunkiZewnetrzne,
                     numerologia.rokNumerologiczny, numerologia.znakZodiaku, numerologia.rahu, numerologia.ketu);
-            pdfCreator.create();
+            pdfCreator.create(sciezka);
 
 
 

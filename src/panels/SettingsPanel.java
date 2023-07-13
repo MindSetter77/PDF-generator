@@ -3,9 +3,12 @@ package panels;
 import main.Window;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class SettingsPanel extends JPanel {
 
@@ -15,30 +18,30 @@ public class SettingsPanel extends JPanel {
 
     String path;
 
+
+    JFileChooser file;
+
     public SettingsPanel(){
-        this.label = new JLabel("src: ");
-        this.textField = new JTextField();
-        this.btn = new JButton();
+        this.file = new JFileChooser();
+        this.add(file);
+        file.setMultiSelectionEnabled(true);
+        file.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        file.setFileHidingEnabled(false);
+        if (file.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            java.io.File f = file.getSelectedFile();
+            this.path = f.getPath();
+            System.err.println(f.getPath());
+        }
 
-        this.setLayout(null);
 
-        label.setBounds(0,0,50,20);
-        textField.setBounds(50,0,200,25);
-        btn.setBounds(500,500,100,30);
-        btn.setText("save");
-
-        this.add(label);
-        this.add(textField);
-        this.add(btn);
-
-        btn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //this.path = textField.getText();
-            }
-        });
 
         this.setBounds(64, 0, Window.WIDTH-64, Window.HEIGHT);
         this.setBackground(Window.red4);
+    }
+
+    public String returnPath(){
+
+
+        return this.path;
     }
 }

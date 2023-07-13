@@ -4,6 +4,7 @@ import main.Window;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Set;
 
 public class NumerologyPanel extends JPanel {
     JTextField imie;
@@ -20,31 +21,34 @@ public class NumerologyPanel extends JPanel {
     GeneratorBtn generatorBtn;
 
 
-    public NumerologyPanel(){
-        this.myNumerologyListener = new MyNumerologyListener(this);
+
+    public NumerologyPanel(SettingsPanel settingsPanel){
+
+
+        this.myNumerologyListener = new MyNumerologyListener(this, settingsPanel);
 
         imie = new JTextField("Imie");
-        imie.setBounds(486,50,200,35);
+        imie.setBounds(150,10,200,40);
         setupButtons(imie);
 
         this.nazwisko = new JTextField("Nazwisko");
-        nazwisko.setBounds(486,150,200,35);
+        nazwisko.setBounds(150,60,200,35);
         setupButtons(nazwisko);
 
         this.data = new JTextField("Data");
-        data.setBounds(486, 250, 200, 35);
+        data.setBounds(150, 110, 200, 35);
         setupButtons(data);
 
         this.znakZodiaku = new JTextField("Znak zodiaku");
-        znakZodiaku.setBounds(486, 350, 200, 35);
+        znakZodiaku.setBounds(150, 160, 200, 35);
         setupButtons(znakZodiaku);
 
         this.rahu = new JTextField("Rahu");
-        rahu.setBounds(486, 450, 200, 35);
+        rahu.setBounds(150, 210, 200, 35);
         setupButtons(rahu);
 
         this.ketu = new JTextField("Ketu");
-        ketu.setBounds(486, 550, 200, 35);
+
         setupButtons(ketu);
 
         this.generatorBtn = new GeneratorBtn();
