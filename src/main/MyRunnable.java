@@ -13,7 +13,7 @@ public class MyRunnable implements Runnable {
         this.window = window;
         this.currentTitle = "";
         idx = 0;
-        String title = "Zawsze i wszedzie policja jebana bedzie";
+        String title = "Najlepszy generator numerologii v2000";
         this.tabl = title.split("");
 
         this.mode = 1;

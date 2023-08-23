@@ -24,7 +24,7 @@ public class LeftPanel extends JPanel {
 
         this.panelButton1 = new PanelButton(0, 1);
         this.panelButton2 = new PanelButton(64,2);
-        this.panelButton3 = new PanelButton(128,3);
+        this.panelButton3 = new PanelButton(297,3);
 
         panelButton1.addMouseListener(myMouseListener);
         panelButton2.addMouseListener(myMouseListener);

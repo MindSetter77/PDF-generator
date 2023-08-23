@@ -84,8 +84,10 @@ public class PDFCreator {
 
             String zmienna = this.imie+"_"+this.nazwisko;
 
+            path += "\\"+zmienna+".pdf";
             System.out.println(path);
             Document document = new Document(PageSize.A4);
+
             PdfWriter.getInstance(document, new FileOutputStream(path));
             Paragraph space = new Paragraph(" ");
             document.open();

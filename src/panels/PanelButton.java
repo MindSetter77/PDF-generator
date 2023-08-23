@@ -11,13 +11,13 @@ public class PanelButton extends JPanel {
         this.dispay = new JLabel("");
         switch(id){
             case 1:
-                dispay.setIcon(new javax.swing.ImageIcon("src/source/settingsicon.png"));
+                dispay.setIcon(new javax.swing.ImageIcon("src/source/historyicon.png"));
                 break;
             case 2:
                 dispay.setIcon(new javax.swing.ImageIcon("src/source/bookicon.png"));
                 break;
             case 3:
-                dispay.setIcon(new javax.swing.ImageIcon("src/source/historyicon.png"));
+                dispay.setIcon(new javax.swing.ImageIcon("src/source/settingsicon.png"));
                 break;
 
 

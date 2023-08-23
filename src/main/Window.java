@@ -2,6 +2,7 @@ package main;
 
 import panels.LeftPanel;
 import panels.NumerologyPanel;
+import panels.OptionsPanel;
 import panels.SettingsPanel;
 
 import javax.swing.*;
@@ -18,7 +19,10 @@ public class Window extends JFrame {
     LeftPanel leftPanel;
     SettingsPanel settingsPanel;
     NumerologyPanel numerologyPanel;
+    OptionsPanel optionsPanel;
     public Window(){
+
+        this.optionsPanel = new OptionsPanel();
         this.leftPanel = new LeftPanel(this);
 
         this.settingsPanel = new SettingsPanel();
@@ -30,11 +34,13 @@ public class Window extends JFrame {
         this.add(leftPanel);
         this.add(settingsPanel);
         this.add(numerologyPanel);
+        this.add(optionsPanel);
 
         MyRunnable r = new MyRunnable(this);
         Thread thread = new Thread(r);
         thread.start();
 
+        this.setResizable(false);
         this.setSize(WIDTH, HEIGHT);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -47,14 +53,19 @@ public class Window extends JFrame {
             case 1:
                 settingsPanel.setVisible(true);
                 numerologyPanel.setVisible(false);
+                optionsPanel.setMeVisible(false);
                 break;
             case 2:
                 settingsPanel.setVisible(false);
                 numerologyPanel.setVisible(true);
+                optionsPanel.setMeVisible(false);
                 break;
             case 3:
                 settingsPanel.setVisible(false);
                 numerologyPanel.setVisible(false);
+                optionsPanel.setMeVisible(true);
+                System.exit(0);
+
                 break;
         }
     }
